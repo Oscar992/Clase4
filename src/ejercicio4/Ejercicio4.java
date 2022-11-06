@@ -46,8 +46,11 @@ public class Ejercicio4 {
             lista) {
         for (var item : lista) {
             var itemParts = Arrays.asList(item.split(","));
-            mapPrecio.put(itemParts.get(2), Double.parseDouble(itemParts.get(0).split("U")[0]));
-            mapStock.put(itemParts.get(2), Integer.parseInt(itemParts.get(1)));
+            var itemName = itemParts.get(2);
+            var itemPrice = Double.parseDouble(itemParts.get(0).substring(1, itemParts.get(0).indexOf("U")));
+            var itemStock = Integer.parseInt(itemParts.get(1));
+            mapPrecio.put(itemName, itemPrice);
+            mapStock.put(itemName, itemStock);
         }
     }
 
@@ -56,13 +59,16 @@ public class Ejercicio4 {
             var fileWriter = new FileWriter("src/ejercicio4/stock.txt");
 
             for (var set : mapStock.entrySet()) {
-                fileWriter.write(String.format("Item: %s Stock: %d \n", set.getKey(), set.getValue()));
+                var name = set.getKey();
+                var stock = set.getValue();
+                var finalString = String.format("Item: %s Stock: %d \n", name, stock);
+                fileWriter.write(finalString);
             }
 
             fileWriter.close();
         } catch (IOException ioException) {
+            System.out.println(ioException.getLocalizedMessage());
         }
-
     }
 
     static void escribirResultadoPrecio(HashMap<String, Double> mapPrecio) {
@@ -70,11 +76,15 @@ public class Ejercicio4 {
             var fileWriter = new FileWriter("src/ejercicio4/precio.txt");
 
             for (var set : mapPrecio.entrySet()) {
-                fileWriter.write(String.format("Item: %s Precio: %f \n", set.getKey(), set.getValue()));
+                var name = set.getKey();
+                var price = set.getValue();
+                var finalString = String.format("Item: %s Precio: %f \n", name, price);
+                fileWriter.write(finalString);
             }
 
             fileWriter.close();
         } catch (IOException ioException) {
+            System.out.println(ioException.getLocalizedMessage());
         }
     }
 
@@ -83,12 +93,16 @@ public class Ejercicio4 {
             var fileWriter = new FileWriter("src/ejercicio4/tienda.txt");
 
             for (var set : mapPrecio.entrySet()) {
-                fileWriter.write(String.format("Item: %s Precio: %f Stock:%d \n", set.getKey(), set.getValue(),
-                        mapStock.get(set.getKey())));
+                var name = set.getKey();
+                var price = set.getValue();
+                var stock = mapStock.get(name);
+                var finalString = String.format("Item: %s Precio: %f Stock:%d \n", name, price, stock);
+                fileWriter.write(finalString);
             }
 
             fileWriter.close();
         } catch (IOException ioException) {
+            System.out.println(ioException.getLocalizedMessage());
         }
     }
 }

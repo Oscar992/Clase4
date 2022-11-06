@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class Ejercicio2 {
     public static void main(String[] args) {
         var mapNumeros = leerNumeros("src/Ejercicio2/numeros.txt");
         var listaResultado = new ArrayList<String>();
-        Integer opcion;
+        int opcion;
         var scanner = new Scanner(System.in);
 
         do {
@@ -28,9 +29,9 @@ public class Ejercicio2 {
         escribirResultado("src/Ejercicio2/resultado2.txt", listaResultado);
     }
 
-    static void imprimirMenu(HashMap<Integer, String> lista) {
-        for (var set : lista.entrySet()) {
-            System.out.println(set.getKey() + " " + set.getValue());
+    static void imprimirMenu(HashMap<Integer, String> map) {
+        for (var set : map.entrySet()) {
+            System.out.printf("%d %s", set.getKey(), set.getValue());
         }
     }
 
@@ -43,7 +44,10 @@ public class Ejercicio2 {
 
             while (scanner.hasNextLine()) {
                 var linea = scanner.nextLine();
-                map.put(Integer.valueOf(linea.split(",")[0]), linea.split(",")[1]);
+                var number = Arrays.asList(linea.split(","));
+                var numberPart1 = number.get(0);
+                var numberPart2 = number.get(1);
+                map.put(Integer.valueOf(numberPart1), numberPart2);
             }
 
             scanner.close();
@@ -54,7 +58,7 @@ public class Ejercicio2 {
         return map;
     }
 
-    static String buscarNumero(Integer n, HashMap<Integer, String> map) {
+    static String buscarNumero(int n, HashMap<Integer, String> map) {
         if (map.containsKey(n)) {
             return map.get(n);
         } else {

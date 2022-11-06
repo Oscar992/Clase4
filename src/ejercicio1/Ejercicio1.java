@@ -30,7 +30,7 @@ public class Ejercicio1 {
 
     static ArrayList<String> leerMenu(String path) {
         var file = new File(path);
-        ArrayList<String> lista = new ArrayList<String>();
+        var lista = new ArrayList<String>();
 
         try {
             var scanner = new Scanner(file);
@@ -42,14 +42,15 @@ public class Ejercicio1 {
             scanner.close();
         } catch (FileNotFoundException fileNotFoundException) {
             System.out.println("No hay");
+            System.out.println(fileNotFoundException.getLocalizedMessage());
         }
 
         return lista;
     }
 
     static void imprimirMenu(ArrayList<String> lista) {
-        for (var string : lista) {
-            System.out.println(string);
+        for (var str : lista) {
+            System.out.println(str);
         }
     }
 
@@ -72,12 +73,13 @@ public class Ejercicio1 {
         try {
             var fileWriter = new FileWriter(path);
 
-            for (var string : lista) {
-                fileWriter.write(string + "\n");
+            for (var str : lista) {
+                fileWriter.write(String.format("%s \n", str));
             }
 
             fileWriter.close();
         } catch (IOException ioException) {
+            System.out.println(ioException.getLocalizedMessage());
         }
     }
 }

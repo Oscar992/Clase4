@@ -38,7 +38,8 @@ public class Ejercicio3 {
         var listaActualizada = new ArrayList<String>();
 
         for (var i = 0; i < lista.size(); i++) {
-            listaActualizada.add(String.format("%d. %s", i + 1, lista.get(i).toUpperCase()));
+            var mensaje = String.format("%d. %s", i + 1, lista.get(i).toUpperCase());
+            listaActualizada.add(mensaje);
         }
 
         return listaActualizada;
@@ -48,12 +49,13 @@ public class Ejercicio3 {
         try {
             var fileWriter = new FileWriter("src/ejercicio3/resultado3.txt");
 
-            for (var string : lista) {
-                fileWriter.write(string + "\n");
+            for (var str : lista) {
+                fileWriter.write(String.format("%s \n", str));
             }
 
             fileWriter.close();
         } catch (IOException ioException) {
+            System.out.println(ioException.getLocalizedMessage());
         }
     }
 }

@@ -1,0 +1,4 @@
+saludarme
+hora
+comida
+despedirse
